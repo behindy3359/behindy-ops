@@ -1,5 +1,6 @@
 services:
   frontend:
+    image: ${FRONTEND_IMAGE:-behindy-frontend-local}
     build:
       context: ../behindy-frontend
       args:
@@ -45,6 +46,7 @@ services:
         max-file: "3"
 
   backend:
+    image: ${BACKEND_IMAGE:-behindy-backend-local}
     build:
       context: ../behindy-backend
       dockerfile: Dockerfile
@@ -108,6 +110,7 @@ services:
         max-file: "3"
 
   llmserver:
+      image: ${LLMSERVER_IMAGE:-behindy-llmserver-local}
       build: ../behindy-llmserver
       container_name: llmserver
       restart: always
