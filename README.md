@@ -72,8 +72,30 @@ CLAUDE_API_KEY=sk-ant-...
 
 ## 로컬 개발
 
-### 전체 서비스 실행
+### 개별 서비스 개발
+
+각 서비스 레포지토리에서 독립적으로 개발 가능:
+
 ```bash
+# Backend 개발
+cd ~/behindy-backend
+docker-compose up -d  # Backend + PostgreSQL + Redis
+
+# Frontend 개발
+cd ~/behindy-frontend
+docker-compose up -d  # Frontend만
+
+# LLMServer 개발
+cd ~/behindy-llmserver
+docker-compose up -d  # LLMServer + Redis
+```
+
+### 전체 서비스 실행 (통합 환경)
+
+```bash
+# behindy-ops에서 전체 실행
+cd ~/behindy-ops
+
 # 환경 변수 설정
 cp .env.example .env
 # .env 파일을 편집하여 실제 값 입력
