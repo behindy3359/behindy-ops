@@ -1,7 +1,7 @@
 services:
   frontend:
     build:
-      context: ./frontend
+      context: ../behindy-frontend
       args:
         - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
         - NEXT_PUBLIC_AI_URL=${NEXT_PUBLIC_AI_URL}
@@ -46,7 +46,7 @@ services:
 
   backend:
     build:
-      context: ./backend
+      context: ../behindy-backend
       dockerfile: Dockerfile
     container_name: backend
     restart: always
@@ -108,7 +108,7 @@ services:
         max-file: "3"
 
   llmserver:
-      build: ./llmserver
+      build: ../behindy-llmserver
       container_name: llmserver
       restart: always
       ports:
