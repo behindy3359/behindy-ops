@@ -41,11 +41,12 @@ docker exec nginx nginx -s reload
 
 echo "- Waiting for nginx to reach ${TARGET_URL}"
 for i in {1..10}; do
-  if docker exec nginx curl -sf "${TARGET_URL}" >/dev/null 2>&1; then
-    echo "✓ ${SERVICE} reachable through nginx"
+  HTTP_CODE=$(docker exec nginx curl -s -o /dev/null -w '%{http_code}' "${TARGET_URL}" || echo "000")
+  if [[ "${HTTP_CODE}" != "000" ]]; then
+    echo "✓ ${SERVICE} responded with HTTP ${HTTP_CODE}"
     exit 0
   fi
-  echo "  retry ${i}/10..."
+  echo "  retry ${i}/10... (HTTP ${HTTP_CODE})"
   sleep 3
 done
 
