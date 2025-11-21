@@ -7,6 +7,8 @@ services:
     image: postgres:15
     container_name: postgres
     restart: always
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}
@@ -33,9 +35,10 @@ services:
     image: redis:7-alpine
     container_name: redis
     restart: always
+    ports:
+      - "6379:6379"
     command: >
       redis-server
-      --requirepass ${REDIS_PASSWORD}
       --save ""
       --appendonly no
       --maxmemory 256mb
